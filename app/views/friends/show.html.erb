@@ -1,0 +1,11 @@
+<%= render @friend %>
+
+<div>
+  <%= link_to "Edit this friend", edit_friend_path(@friend), class:"btn btn-success" %>
+  <%= link_to "Back to friends", friends_path, class:"btn btn-secondary" %>
+  <%= button_to "Destroy this friend", @friend, method: :delete, form: { data: { 
+    "turbo-confirm": 'Are you sure?'
+  },
+  style: 'display: inline-block' 
+  }, class:"btn btn-danger"%>
+</div>
