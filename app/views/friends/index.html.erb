@@ -5,11 +5,11 @@
   <thead class="table-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First Name</th>
-      <th scope="col">Last Name</th>
+      <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col">Phone</th>
       <th scope="col">Facebook</th>
+      <th scope="col">User_id</th>
       <th scope="col">Handle</th>
     </tr>
   </thead>
@@ -17,18 +17,22 @@
   <% @friends.each do |friend| %>
     <tr>
       <th scope="row"><%= dom_id friend %></th>
-      <td><%= friend.first_name %></td>
-      <td><%= friend.last_name %></td>
+      <td>
+        <%= link_to friend.first_name + " " + friend.last_name, friend %>
+      </td>
       <td><%= friend.email %></td>
       <td><%= friend.phone_string %></td>
       <td><%= friend.facebook %></td>
+      <td><%= friend.user_id %></td>
       <td>
         <%= link_to "Show", friend, class:"btn btn-success" %>
-        <%= link_to "Edit", edit_friend_path(friend), class:"btn btn-info" %>
-        <%= link_to "Delete", friend, data: { 
-          "turbo-method": :delete,
-          "turbo-confirm": 'Are you sure?'
-        }, class:"btn btn-danger" %>
+        <% if friend.user === current_user %>
+          <%= link_to "Edit", edit_friend_path(friend), class:"btn btn-info" %>
+          <%= link_to "Delete", friend, data: { 
+            "turbo-method": :delete,
+            "turbo-confirm": 'Are you sure?'
+          }, class:"btn btn-danger" %>
+        <% end %>
       </td>
     </tr>
   <% end %>
